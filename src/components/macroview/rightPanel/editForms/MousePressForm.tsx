@@ -72,18 +72,21 @@ export default function MousePressForm({
     }
     let duration = DefaultMouseDelay
 
-    if (mousepressDuration >= DefaultMouseDelay) {
+    if (Number.isNaN(mousepressDuration)) {
+      return
+    }
+
+    if (mousepressDuration >= 0) {
       duration = mousepressDuration
-    } else if (mousepressDuration < DefaultMouseDelay) {
+    } else {
       toast({
-        title: 'Minimum duration',
-        description: `Duration must be at least ${DefaultMouseDelay}ms`,
+        title: 'Invalid duration',
+        description: 'Duration cannot be negative',
         status: 'warning',
         duration: 4000,
         isClosable: true
       })
-    } else if (Number.isNaN(duration)) {
-      return
+      duration = DefaultMouseDelay
     }
 
     const temp: MouseEventAction = {

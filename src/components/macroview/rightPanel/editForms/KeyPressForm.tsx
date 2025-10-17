@@ -64,19 +64,21 @@ export default function KeyPressForm({
   const onInputBlur = useCallback(() => {
     let duration = DefaultMacroDelay
 
-    if (keypressDuration >= DefaultMacroDelay) {
+    if (Number.isNaN(keypressDuration)) {
+      return
+    }
+
+    if (keypressDuration >= 0) {
       duration = keypressDuration
     } else {
       toast({
-        title: 'Minimum duration',
-        description: `Duration must be at least ${DefaultMacroDelay}ms`,
+        title: 'Invalid duration',
+        description: 'Duration cannot be negative',
         status: 'warning',
         duration: 4000,
         isClosable: true
       })
-      if (Number.isNaN(duration)) {
-        return
-      }
+      duration = DefaultMacroDelay
     }
 
     const temp: KeyPressEventAction = {

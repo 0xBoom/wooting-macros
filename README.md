@@ -8,3 +8,5 @@ Can be unstable, use at own risk.
 - **Loop macros:** Loop macros
 - **Faster Macros** No delay treshold limit (0ms macros)
 
+## Install
+You need to build the application yourself with `yarn install` and then `yarn tauri build` and then find the .exe in folder: `src-tauri/target/release/`.
